@@ -98,7 +98,7 @@ public class NextcloudOAuth2Controller : ControllerBase
             return Ok(new TestConnectionResult
             {
                 Success = false,
-                ErrorMessage = "URL сервера не указан"
+                ErrorMessage = Localization.Text(HttpContext, "test.urlMissing")
             });
         }
 
@@ -158,7 +158,7 @@ public class NextcloudOAuth2Controller : ControllerBase
             return Ok(new TestConnectionResult
             {
                 Success = false,
-                ErrorMessage = "Nextcloud не установлен или ответ некорректен"
+                ErrorMessage = Localization.Text(HttpContext, "test.notInstalled")
             });
         }
         catch (HttpRequestException ex)
@@ -167,7 +167,7 @@ public class NextcloudOAuth2Controller : ControllerBase
             return Ok(new TestConnectionResult
             {
                 Success = false,
-                ErrorMessage = $"Ошибка сети: {ex.Message}. Проверьте, что URL доступен из контейнера Jellyfin."
+                ErrorMessage = Localization.Text(HttpContext, "test.networkError", ex.Message)
             });
         }
         catch (TaskCanceledException ex)
@@ -176,7 +176,7 @@ public class NextcloudOAuth2Controller : ControllerBase
             return Ok(new TestConnectionResult
             {
                 Success = false,
-                ErrorMessage = "Таймаут подключения (10 сек). Сервер недоступен или отвечает слишком медленно."
+                ErrorMessage = Localization.Text(HttpContext, "test.timeout")
             });
         }
         catch (Exception ex)

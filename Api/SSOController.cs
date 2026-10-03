@@ -68,7 +68,7 @@ public class SSOController : ControllerBase
         if (string.IsNullOrWhiteSpace(config.NextcloudServerUrl) ||
             string.IsNullOrWhiteSpace(config.ClientId))
         {
-            return BadRequest("Nextcloud OAuth2 не настроен");
+            return BadRequest(Localization.Text(HttpContext, "sso.notConfigured"));
         }
 
         var finalReturnUrl = SanitizeReturnUrl(returnUrl);
@@ -113,7 +113,7 @@ public class SSOController : ControllerBase
         {
             _logger.LogError(ex, "[NextcloudOAuth2] Ошибка подключения при получении OIDC discovery");
             StateStore.Remove(state);
-            return BadRequest("Не удалось подключиться к Nextcloud");
+            return BadRequest(Localization.Text(HttpContext, "sso.connectionFailed"));
         }
 
         // Fallback на стандартный endpoint Nextcloud, если discovery недоступен
@@ -150,14 +150,14 @@ public class SSOController : ControllerBase
         if (string.IsNullOrWhiteSpace(state))
         {
             _logger.LogWarning("[NextcloudOAuth2] Отсутствует state параметр");
-            return BadRequest("Неверный state параметр");
+            return BadRequest(Localization.Text(HttpContext, "sso.invalidState"));
         }
 
         // Проверяем привязку state к браузеру (login CSRF)
         if (!StateStore.VerifyBinding(HttpContext, state))
         {
             _logger.LogWarning("[NextcloudOAuth2] State не совпадает с cookie браузера");
-            return BadRequest("Неверный state параметр");
+            return BadRequest(Localization.Text(HttpContext, "sso.invalidState"));
         }
 
         // Проверяем state в хранилище (CSRF + одноразовость)
@@ -165,12 +165,12 @@ public class SSOController : ControllerBase
         if (entry == null)
         {
             _logger.LogWarning("[NextcloudOAuth2] Неверный или истекший state");
-            return BadRequest("Неверный state параметр");
+            return BadRequest(Localization.Text(HttpContext, "sso.invalidState"));
         }
 
         if (string.IsNullOrWhiteSpace(code))
         {
-            return BadRequest("Отсутствует code параметр");
+            return BadRequest(Localization.Text(HttpContext, "sso.missingCode"));
         }
 
         var config = _plugin.Configuration;
@@ -188,7 +188,7 @@ public class SSOController : ControllerBase
             if (string.IsNullOrEmpty(tokenResponse?.AccessToken))
             {
                 _logger.LogWarning("[NextcloudOAuth2] Пустой access token в ответе token endpoint");
-                return BadRequest("Не удалось получить access token. Подробности в журнале сервера.");
+                return BadRequest(Localization.Text(HttpContext, "sso.tokenFailed"));
             }
 
             // Шаг 4: Получаем информацию о пользователе
@@ -197,7 +197,7 @@ public class SSOController : ControllerBase
             if (userInfo == null || string.IsNullOrEmpty(userInfo.PreferredUsername))
             {
                 _logger.LogWarning("[NextcloudOAuth2] Не удалось получить информацию о пользователе");
-                return BadRequest("Не удалось получить информацию о пользователе. Подробности в журнале сервера.");
+                return BadRequest(Localization.Text(HttpContext, "sso.userInfoFailed"));
             }
 
             _logger.LogInformation(
@@ -210,7 +210,7 @@ public class SSOController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex, "[NextcloudOAuth2] Ошибка при обработке callback");
-            return BadRequest("Ошибка аутентификации. Подробности в журнале сервера.");
+            return BadRequest(Localization.Text(HttpContext, "sso.authError"));
         }
     }
 
@@ -227,7 +227,7 @@ public class SSOController : ControllerBase
         if (string.IsNullOrWhiteSpace(userInfo.UserId))
         {
             _logger.LogWarning("[NextcloudOAuth2] Стабильный ID пользователя из Nextcloud пустой");
-            return BadRequest("Не удалось получить идентификатор пользователя из Nextcloud");
+            return BadRequest(Localization.Text(HttpContext, "sso.noUserId"));
         }
 
         var user = await _userBinder.ResolveAsync(userInfo, config).ConfigureAwait(false);
@@ -237,7 +237,7 @@ public class SSOController : ControllerBase
             _logger.LogWarning(
                 "[NextcloudOAuth2] Вход отклонён: для {NextcloudId} нет привязки, автосоздание отключено",
                 userInfo.UserId);
-            return BadRequest("Аккаунт не найден. Обратитесь к администратору.");
+            return BadRequest(Localization.Text(HttpContext, "sso.accountNotFound"));
         }
 
         _logger.LogInformation("[NextcloudOAuth2] Вход выполнен для пользователя: {UserId}", user.Id);
@@ -266,7 +266,7 @@ public class SSOController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex, "[NextcloudOAuth2] Ошибка создания сессии для пользователя {UserId}", user.Id);
-            return BadRequest("Не удалось создать сессию. Подробности в журнале сервера.");
+            return BadRequest(Localization.Text(HttpContext, "sso.sessionFailed"));
         }
     }
 

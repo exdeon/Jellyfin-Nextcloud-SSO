@@ -138,7 +138,9 @@ Things to keep in mind:
 - The `href` is a relative path: the button works both behind a reverse proxy and
   with the “Public base URL” filled in.
 - Save the plugin settings first; otherwise `/sso/OID/start/nextcloud` returns
-  `400 Nextcloud OAuth2 is not configured`.
+  `400` with a “not configured” message. The text follows the browser’s
+  Accept-Language: `Nextcloud OAuth2 is not configured` (en) /
+  `Nextcloud OAuth2 не настроен` (ru).
 
 ## Security
 

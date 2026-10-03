@@ -6,18 +6,18 @@
     <div data-role="content">
         <div class="content-primary">
             <h2>Nextcloud OAuth2 SSO</h2>
-            <p class="fieldDescription">Настройте параметры подключения к вашему серверу Nextcloud для авторизации пользователей.</p>
+            <p class="fieldDescription" data-i18n="page.description">Настройте параметры подключения к вашему серверу Nextcloud для авторизации пользователей.</p>
 
             <form id="NextcloudOAuth2Form">
                 <!-- Поле: URL сервера -->
                 <div class="inputContainer">
-                    <label class="inputLabel" for="txtServerUrl">URL сервера Nextcloud</label>
+                    <label class="inputLabel" for="txtServerUrl" data-i18n="field.serverUrl.label">URL сервера Nextcloud</label>
                     <input is="emby-input"
                            type="url"
                            id="txtServerUrl"
                            placeholder="https://cloud.example.com"
                            required />
-                    <div class="fieldDescription">Базовый адрес вашего Nextcloud без слеша на конце.</div>
+                    <div class="fieldDescription" data-i18n="field.serverUrl.description">Базовый адрес вашего Nextcloud без слеша на конце.</div>
                 </div>
 
                 <!-- Поле: Client ID -->
@@ -36,44 +36,44 @@
                            type="password"
                            id="txtClientSecret"
                            autocomplete="new-password" />
-                    <div class="fieldDescription">Оставьте пустым, чтобы сохранить текущий секрет без изменений.</div>
+                    <div class="fieldDescription" data-i18n="field.clientSecret.description">Оставьте пустым, чтобы сохранить текущий секрет без изменений.</div>
                 </div>
 
                 <!-- Поле: Публичный базовый URL -->
                 <div class="inputContainer">
-                    <label class="inputLabel" for="txtPublicBaseUrl">Публичный базовый URL (необязательно)</label>
+                    <label class="inputLabel" for="txtPublicBaseUrl" data-i18n="field.publicBaseUrl.label">Публичный базовый URL (необязательно)</label>
                     <input is="emby-input"
                            type="url"
                            id="txtPublicBaseUrl"
                            placeholder="https://jellyfin.example.com" />
-                    <div class="fieldDescription">Внешний адрес этого Jellyfin, используемый в redirect URI. Оставьте пустым для автоопределения.</div>
+                    <div class="fieldDescription" data-i18n="field.publicBaseUrl.description">Внешний адрес этого Jellyfin, используемый в redirect URI. Оставьте пустым для автоопределения.</div>
                 </div>
 
                 <!-- Чекбокс: автосоздание -->
                 <div class="checkboxContainer checkboxContainer-withDescription">
                     <label>
                         <input type="checkbox" is="emby-checkbox" id="chkAutoCreateUsers" />
-                        <span>Автоматически создавать пользователей</span>
+                        <span data-i18n="field.autoCreate.label">Автоматически создавать пользователей</span>
                     </label>
-                    <div class="fieldDescription checkboxFieldDescription">Новые пользователи из Nextcloud будут созданы в Jellyfin при первом входе.</div>
+                    <div class="fieldDescription checkboxFieldDescription" data-i18n="field.autoCreate.description">Новые пользователи из Nextcloud будут созданы в Jellyfin при первом входе.</div>
                 </div>
 
                 <!-- Чекбокс: привязка по имени (legacy) -->
                 <div class="checkboxContainer checkboxContainer-withDescription">
                     <label>
                         <input type="checkbox" is="emby-checkbox" id="chkBindExistingUsersByName" />
-                        <span>Привязывать существующих пользователей по имени</span>
+                        <span data-i18n="field.bindByName.label">Привязывать существующих пользователей по имени</span>
                     </label>
-                    <div class="fieldDescription checkboxFieldDescription">Временная миграционная опция: при входе пользователь привязывается к аккаунту с совпадающим именем. После миграции отключите её — иначе возможен захват чужого аккаунта при совпадении имён.</div>
+                    <div class="fieldDescription checkboxFieldDescription" data-i18n="field.bindByName.description">Временная миграционная опция: при входе пользователь привязывается к аккаунту с совпадающим именем. После миграции отключите её — иначе возможен захват чужого аккаунта при совпадении имён.</div>
                 </div>
 
                 <!-- Чекбокс: PKCE -->
                 <div class="checkboxContainer checkboxContainer-withDescription">
                     <label>
                         <input type="checkbox" is="emby-checkbox" id="chkEnablePkce" />
-                        <span>Использовать PKCE (S256)</span>
+                        <span data-i18n="field.pkce.label">Использовать PKCE (S256)</span>
                     </label>
-                    <div class="fieldDescription checkboxFieldDescription">Включайте, только если приложение Nextcloud зарегистрировано с поддержкой PKCE.</div>
+                    <div class="fieldDescription checkboxFieldDescription" data-i18n="field.pkce.description">Включайте, только если приложение Nextcloud зарегистрировано с поддержкой PKCE.</div>
                 </div>
 
                 <!-- Кнопка сохранения -->
@@ -81,15 +81,15 @@
                     <button is="emby-button"
                             type="submit"
                             class="raised button-submit block">
-                        <span>Сохранить</span>
+                        <span data-i18n="button.save">Сохранить</span>
                     </button>
                 </div>
             </form>
 
             <!-- Секция ссылки входа -->
             <div style="margin-top: 2em; border-top: 1px solid #ccc;">
-                <h3>Вход через Nextcloud</h3>
-                <p class="fieldDescription">Ссылка для входа пользователей через Nextcloud. Сохраните настройки перед использованием.</p>
+                <h3 data-i18n="section.login.title">Вход через Nextcloud</h3>
+                <p class="fieldDescription" data-i18n="section.login.description">Ссылка для входа пользователей через Nextcloud. Сохраните настройки перед использованием.</p>
                 <div class="inputContainer">
                     <input is="emby-input"
                            type="text"
@@ -100,19 +100,19 @@
                         type="button"
                         id="btnCopySsoUrl"
                         class="raised button-submit block">
-                    <span>Копировать ссылку</span>
+                    <span data-i18n="button.copyLink">Копировать ссылку</span>
                 </button>
             </div>
 
             <!-- Секция тестирования подключения -->
             <div style="margin-top: 2em; border-top: 1px solid #ccc;">
-                <h3>Тестирование подключения</h3>
-                <p class="fieldDescription">Проверьте корректность настроек, подключившись к Nextcloud. Предварительно сохраните настройки.</p>
+                <h3 data-i18n="section.test.title">Тестирование подключения</h3>
+                <p class="fieldDescription" data-i18n="section.test.description">Проверьте корректность настроек, подключившись к Nextcloud. Предварительно сохраните настройки.</p>
                 <button is="emby-button"
                         type="button"
                         id="btnTestConnection"
                         class="raised button-submit block">
-                    <span>Проверить подключение</span>
+                    <span data-i18n="button.testConnection">Проверить подключение</span>
                 </button>
                 <div id="connectionStatus" style="margin-top: 1em;"></div>
             </div>
