@@ -1,0 +1,14 @@
+# Сборка .NET
+bin/
+obj/
+*.user
+*.suo
+
+# Упаковка плагинов
+dist/
+*.zip
+
+# IDE
+.vs/
+.idea/
+.vscode/

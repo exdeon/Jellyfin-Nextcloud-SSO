@@ -1,0 +1,20 @@
+[
+    {
+        "name":  "Nextcloud OAuth2",
+        "description":  "Nextcloud OAuth2 — вход в Jellyfin через Nextcloud OAuth2 (SSO).",
+        "overview":  "Позволяет пользователям входить в Jellyfin через Nextcloud.",
+        "owner":  "exdeon",
+        "category":  "Authentication",
+        "guid":  "5c4de6ba220f4ace9dce72ba60c66861",
+        "imageUrl":  "https://raw.githubusercontent.com/exdeon/Jellyfin-Nextcloud-SSO/main/Branding/Logo.png",
+        "versions":  [
+                         {
+                             "version":  "1.0.0.2",
+                             "targetAbi":  "12.1.0.0",
+                             "sourceUrl":  "https://github.com/exdeon/Jellyfin-Nextcloud-SSO/releases/download/v1.0.0.2/Nextcloud-OAuth2-1.0.0.2.zip",
+                             "checksum":  "AB2FB8A72F2F0F6C6E52955FB31305CA",
+                             "changelog":  "Исправлена рассинхронизация версии сборки и meta.json (404 при включении, отключении и удалении плагина), история версий в каталоге плагинов"
+                         }
+                     ]
+    }
+]

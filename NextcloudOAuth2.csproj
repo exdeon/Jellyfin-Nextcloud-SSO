@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<!-- Целевая платформа .NET 10 для Jellyfin 12+ -->
+		<TargetFramework>net10.0</TargetFramework>
+
+		<!-- Версия assembly. ОБЯЗАТЕЛЬНО совпадает с meta.json: Jellyfin отдаёт её как
+		     PluginInfo.Version, а Enable/Disable/Uninstall ищут плагин по версии из
+		     meta.json — рассинхрон даёт 404 на странице плагина. -->
+		<Version>1.0.0.2</Version>
+
+		<!-- Строгие настройки пространств имен и сборок -->
+		<RootNamespace>Jellyfin.Plugin.NextcloudOAuth2</RootNamespace>
+		<AssemblyName>Jellyfin.Plugin.NextcloudOAuth2</AssemblyName>
+
+		<!-- Отключаем автоматический поиск EmbeddedResource, чтобы задать пути вручную -->
+		<EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+
+		<!-- Строгая проверка nullable-типов -->
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- Зависимости Jellyfin 12.1.0 -->
+		<PackageReference Include="Jellyfin.Controller" Version="12.1.0" />
+		<PackageReference Include="Jellyfin.Model" Version="12.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- Явно указываем пути к ресурсам, чтобы они совпадали с GetType().Namespace -->
+		<EmbeddedResource Include="Configuration\configPage.html" />
+		<EmbeddedResource Include="Web\configPage.js" />
+	</ItemGroup>
+
+</Project>

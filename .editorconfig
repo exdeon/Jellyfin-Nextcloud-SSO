@@ -1,0 +1,19 @@
+# Единый стиль проекта Nextcloud OAuth2
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+
+# manifest.json и meta.json обязаны быть UTF-8 без BOM:
+# System.Text.Json на стороне Jellyfin отклоняет файлы с BOM.
+[*.{json,yaml,yml}]
+charset = utf-8
+
+# build/package.ps1 содержит кириллицу. Windows PowerShell 5.1 читает
+# файлы без BOM как ANSI, поэтому здесь BOM обязателен.
+[*.ps1]
+charset = utf-8-bom
+
+[*.md]
+indent_size = unset

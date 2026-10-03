@@ -1,0 +1,12 @@
+{
+  "guid": "5c4de6ba-220f-4ace-9dce-72ba60c66861",
+  "name": "Nextcloud OAuth2",
+  "description": "Интеграция входа через Nextcloud OAuth2",
+  "category": "Authentication",
+  "owner": "exdeon",
+  "overview": "Позволяет пользователям входить в Jellyfin через Nextcloud.",
+  "targetAbi": "12.1.0.0",
+  "frameworkVersion": "12.1.0",
+  "imagePath": "Logo.png",
+  "version": "1.0.0.2"
+}

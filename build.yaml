@@ -1,0 +1,12 @@
+name: "Nextcloud OAuth2"
+guid: "5c4de6ba-220f-4ace-9dce-72ba60c66861"
+version: "1.0.0.2"
+targetAbi: "12.1.0.0"
+frameworkVersion: "12.1.0"
+owner: "exdeon"
+overview: "Интеграция входа через Nextcloud OAuth2"
+description: "Позволяет пользователям входить в Jellyfin через Nextcloud."
+category: "Authentication"
+artifacts:
+  - "Jellyfin.Plugin.NextcloudOAuth2.dll"
+changelog: "Исправлена рассинхронизация версии сборки и meta.json (404 при включении, отключении и удалении плагина), история версий в каталоге плагинов"
