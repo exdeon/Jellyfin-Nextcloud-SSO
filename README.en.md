@@ -12,7 +12,8 @@ over OAuth 2.0 (auth code flow + OIDC discovery), without a separate password.
 | Package name | `Nextcloud OAuth2`                 |
 | GUID         | `5c4de6ba220f4ace9dce72ba60c66861` |
 | Category     | `Authentication`                   |
-| Target ABI   | Jellyfin `12.1.0.0`                |
+| Target ABI   | Jellyfin `12.1+`                   |
+| Tested on    | Nextcloud `34, 35.0.1`             |
 
 ## How it works
 
@@ -74,8 +75,10 @@ Notes:
   (if pretty URLs are disabled — add `/index.php`).
 - The plugin sends `scope=openid profile email`; in current Nextcloud versions the
   scopes are effectively not applied and the token grants full access to the user account.
-- To skip the confirmation screen on sign-in for a trusted application:
+- To set app as trusted for screen on sign-in:
   `occ config:app:set oauth2 skipAuthPickerApplications --type array --value '["Jellyfin"]'`
+- Command example for Nextcloud-AIO:
+  `sudo docker exec --user www-data -it nextcloud-aio-nextcloud php occ config:app:set oauth2 skipAuthPickerApplications --type array --value '["Jellyfin"]'`
 
 ### 2. Jellyfin — configure the plugin
 
