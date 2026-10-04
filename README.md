@@ -8,11 +8,12 @@ SSO-плагин для **Jellyfin 12.1+**: пользователи входя�
 Nextcloud по протоколу OAuth 2.0 (auth code flow + OIDC discovery), без отдельного пароля.
 
 | | |
-|---|---|
+| --- |---|
 | Имя пакета | `Nextcloud OAuth2` |
 | GUID | `5c4de6ba-220f-4ace-9dce-72ba60c66861` |
 | Категория | `Authentication` |
-| Целевая ABI | Jellyfin `12.1.0.0` |
+| Целевая ABI | Jellyfin `12.1+` |
+| Проверено на | Nextcloud `34, 35.0.1` |
 
 ## Как это работает
 
@@ -73,8 +74,10 @@ Nextcloud выдаст **Client Identifier** и **Client Secret** — сохра
   (если отключены pretty URLs — добавьте `/index.php`).
 - Плагин передаёт `scope=openid profile email`; в текущих версиях Nextcloud скоупы
   фактически не применяются и токен даёт полный доступ к аккаунту пользователя.
-- Чтобы убрать экран подтверждения при входе для доверенного приложения:
+- Чтобы убрать предупреждение на экране подтверждения при входе:
   `occ config:app:set oauth2 skipAuthPickerApplications --type array --value '["Jellyfin"]'`
+- Пример команды, если используется Nextcloud-AIO:
+  `sudo docker exec --user www-data -it nextcloud-aio-nextcloud php occ config:app:set oauth2 skipAuthPickerApplications --type array --value '["Jellyfin"]'`
 
 ### 2. Jellyfin — настроить плагин
 
